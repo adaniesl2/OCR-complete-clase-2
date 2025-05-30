@@ -44,7 +44,8 @@ remove_files(7)
 
 
 st.title("Reconocimiento Óptico de Caracteres")
-st.subheader("Elige la fuente de la imágen, esta puede venir de la cámara o cargando un archivo")
+st.subheader("Deja que Alakazam lea lo que quieres, y te lo convertirá en texto telepáticamente.")
+image = Image.open('Alakazam.png')
 
 cam_ = st.checkbox("Usar Cámara")
 
@@ -54,10 +55,10 @@ else :
    img_file_buffer = None
    
 with st.sidebar:
-      st.subheader("Procesamiento para Cámara")
+      st.subheader("Filtros Telepáticos (Procesamiento para Cámara)")
       filtro = st.radio("Filtro para imagen con cámara",('Sí', 'No'))
 
-bg_image = st.file_uploader("Cargar Imagen:", type=["png", "jpg"])
+bg_image = st.file_uploader("Cargar Imagen:", type=["png", "jpg", "jpeg"])
 if bg_image is not None:
     uploaded_file=bg_image
     st.image(uploaded_file, caption='Imagen cargada.', use_column_width=True)
@@ -90,7 +91,7 @@ if img_file_buffer is not None:
     st.write(text) 
 
 with st.sidebar:
-      st.subheader("Parámetros de traducción")
+      st.subheader("Opciones de traducción")
       
       try:
           os.mkdir("temp")
@@ -101,8 +102,8 @@ with st.sidebar:
       
       #text = st.text_input("Enter text")
       in_lang = st.selectbox(
-          "Seleccione el lenguaje de entrada",
-          ("Ingles", "Español", "Bengali", "koreano", "Mandarin", "Japones"),
+          "Selecciona el lenguaje de entrada",
+          ("Ingles", "Español", "Bengali", "Coreano", "Mandarin", "Japones"),
       )
       if in_lang == "Ingles":
           input_language = "en"
@@ -110,7 +111,7 @@ with st.sidebar:
           input_language = "es"
       elif in_lang == "Bengali":
           input_language = "bn"
-      elif in_lang == "koreano":
+      elif in_lang == "Coreano":
           input_language = "ko"
       elif in_lang == "Mandarin":
           input_language = "zh-cn"
@@ -118,8 +119,8 @@ with st.sidebar:
           input_language = "ja"
       
       out_lang = st.selectbox(
-          "Select your output language",
-          ("Ingles", "Español", "Bengali", "koreano", "Mandarin", "Japones"),
+          "Selecciona el lenguaje de salida",
+          ("Ingles", "Español", "Bengali", "Coreano", "Mandarin", "Japones"),
       )
       if out_lang == "Ingles":
           output_language = "en"
@@ -127,7 +128,7 @@ with st.sidebar:
           output_language = "es"
       elif out_lang == "Bengali":
           output_language = "bn"
-      elif out_lang == "koreano":
+      elif out_lang == "Coreano":
           output_language = "ko"
       elif out_lang == "Chinese":
           output_language = "zh-cn"
@@ -135,7 +136,7 @@ with st.sidebar:
           output_language = "ja"
       
       english_accent = st.selectbox(
-          "Seleccione el acento",
+          "Selecciona el acento",
           (
               "Default",
               "India",
@@ -168,7 +169,7 @@ with st.sidebar:
 
       display_output_text = st.checkbox("Mostrar texto")
 
-      if st.button("convert"):
+      if st.button("Convert"):
           result, output_text = text_to_speech(input_language, output_language, text, tld)
           audio_file = open(f"temp/{result}.mp3", "rb")
           audio_bytes = audio_file.read()
