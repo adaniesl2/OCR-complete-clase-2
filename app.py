@@ -104,7 +104,7 @@ with st.sidebar:
       #text = st.text_input("Enter text")
       in_lang = st.selectbox(
           "Selecciona el lenguaje de entrada",
-          ("Ingles", "Español", "Bengali", "Coreano", "Mandarin", "Japones"),
+          ("Español", "Ingles", "Bengali", "Coreano", "Mandarin", "Japones"),
       )
       if in_lang == "Ingles":
           input_language = "en"
