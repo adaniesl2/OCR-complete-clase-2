@@ -46,6 +46,7 @@ remove_files(7)
 st.title("Reconocimiento Óptico de Caracteres")
 st.subheader("Deja que Alakazam lea lo que quieres, y te lo convertirá en texto telepáticamente.")
 image = Image.open('Alakazam.png')
+st.image(image, width=350)
 
 cam_ = st.checkbox("Usar Cámara")
 
